@@ -8,21 +8,21 @@
 
 #board {
   position: absolute;
-  height: 600px;
-  width: 1200px;
-  background-color: rgb(6, 136, 119);
+  height: 400px;
+  width: 1500px;
+  background-color: rgb(211, 254, 255);
   align-content: center;
   align-self: center;
 }
 
 #title {
-  background-color: rgb(128, 128, 128);
+  background-color: rgb(223, 164, 164);
   align-content: center;
   align-self: center;
 }
 
 #scores {
-  background-color: rgb(247, 134, 241);
+  background-color: rgb(94, 255, 207);
   align-content: center;
   align-self: center;
 }

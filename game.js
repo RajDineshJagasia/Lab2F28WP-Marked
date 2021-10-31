@@ -133,6 +133,13 @@ function getRandomInt(max){
   return randomSpeed;
 }
 
+function restart(){
+  hits.innerHTML=0;
+  duration.innerHTML=0;
+  bees=[];
+  location.reload();
+}
+
 
 function createBeeImg(wNum) {
   //get dimension and position of board div
@@ -192,6 +199,12 @@ function moveBees() {
   isHit(bees[i], bear); //we add this to count stings
   }
  }
+
+ function addBee(){
+   var bee = new Bee(1); 
+   bee.display;
+   bee.push(bee);
+ }
  
  function updateBees() { // update loop for game
 
@@ -221,6 +234,7 @@ function moveBees() {
   let newStingTime = new Date();
   let thisDuration = newStingTime - lastStingTime;
   lastStingTime = newStingTime;
+  
   let longestDuration = Number(duration.innerHTML);
   if (longestDuration === 0) {
   longestDuration = thisDuration;
