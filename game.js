@@ -1,18 +1,44 @@
+var bear ;
+var bees;
+
+
 function Bear() {
+
   this.dBear = 100;
   this.htmlElement = document.getElementById("bear");
   this.id = this.htmlElement.id;
   this.x = this.htmlElement.offsetLeft;
   this.y = this.htmlElement.offsetTop;
+
   this.move = function (xDir, yDir) {
+    this.fitBounds();
     this.x += this.dBear * xDir;
     this.y += this.dBear * yDir;
     this.display();
   };
+
   this.display = function () {
+    this.fitBounds();
     this.htmlElement.style.left = this.x + "px";
     this.htmlElement.style.top = this.y + "px";
     this.htmlElement.style.display = "block";
+  };
+  this.fitBounds = function () {
+    let parent = this.htmlElement.parentElement;
+    let iw = this.htmlElement.offsetWidth;
+    let ih = this.htmlElement.offsetHeight;
+    let l = parent.offsetLeft;
+    let t = parent.offsetTop;
+    let w = parent.offsetWidth;
+    let h = parent.offsetHeight;
+    if (this.x < 0) 
+      this.x = 0;
+    if (this.x > w - iw) 
+      this.x = w - iw;
+    if (this.y < 0) 
+      this.y = 0;
+    if (this.y > h - ih) 
+      this.y = h - ih;
   };
 }
 
@@ -25,21 +51,14 @@ function start() {
   bees = new Array();
   //create bees
   makeBees();
+
 }
 
-this.fitBounds = function () {
-  let parent = this.htmlElement.parentElement;
-  let iw = this.htmlElement.offsetWidth;
-  let ih = this.htmlElement.offsetHeight;
-  let l = parent.offsetLeft;
-  let t = parent.offsetTop;
-  let w = parent.offsetWidth;
-  let h = parent.offsetHeight;
-  if (this.x < 0) this.x = 0;
-  if (this.x > w - iw) this.x = w - iw;
-  if (this.y < 0) this.y = 0;
-  if (this.y > h - ih) this.y = h - ih;
-};
+function setSpeed(){
+  bear.dBear=document.getElementById('speedBear').value
+}
+
+
 
 // Handle keyboad events
 // to move the bear
@@ -63,12 +82,6 @@ function moveBear(e) {
   } // down key
 }
 
-this.move = function (xDir, yDir) {
-  this.fitBounds(); //we add this instruction to keep bear within board
-  this.x += this.dBear * xDir;
-  this.y += this.dBear * yDir;
-  this.display();
-};
 
 class Bee {
   constructor(beeNumber) {
@@ -82,6 +95,7 @@ class Bee {
     this.y = this.htmlElement.offsetTop;
     this.move = function (dx, dy) {
       //move the bees by dx, dy
+      this.fitBounds();
       this.x += dx;
       this.y += dy;
       this.display();
@@ -102,13 +116,23 @@ class Bee {
       let t = parent.offsetTop;
       let w = parent.offsetWidth;
       let h = parent.offsetHeight;
-      if (this.x < 0) this.x = 0;
-      if (this.x > w - iw) this.x = w - iw;
-      if (this.y < 0) this.y = 0;
-      if (this.y > h - ih) this.y = h - ih;
+      if (this.x < 0)
+        this.x = 0;
+      if (this.x > w - iw) 
+        this.x = w - iw;
+      if (this.y < 0) 
+        this.y = 0;
+      if (this.y > h - ih) 
+        this.y = h - ih;
     };
   }
 }
+
+function getRandomInt(max){
+  let randomSpeed=Math.floor(Math.random() * max) ;
+  return randomSpeed;
+}
+
 
 function createBeeImg(wNum) {
   //get dimension and position of board div
@@ -135,6 +159,7 @@ function createBeeImg(wNum) {
   //return the img object
   return img;
 }
+
 
 function makeBees() {
   //get number of bees specified by the user
@@ -220,3 +245,4 @@ function overlap(element1, element2) {
   }
   return true;
 }
+
