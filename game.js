@@ -201,13 +201,36 @@ function moveBees() {
  }
 
  function addBee(){
-   var bee = new Bee(1); 
-   bee.display;
-   bee.push(bee);
+  let nbBees = document.getElementById("nbBees").value ;
+  let numBees = Number(nbBees);
+  document.getElementById("nbBees").value=numBees+1;
+  restart();
  }
+
+ function delBee(){
+  let nbBees = document.getElementById("nbBees").value ;
+  let numBees = Number(nbBees);
+  if (numBees==0){
+    window.alert("There are already 0 bees");
+    return;
+  }
+  document.getElementById("nbBees").value=numBees-1;
+  restart();
+ }
+
+ function delAllBees(){
+  let nbBees = document.getElementById("nbBees").value ;
+  let numBees = Number(nbBees);
+  if (numBees==0){
+    window.alert("There are already 0 bees");
+    return;
+  }
+  document.getElementById("nbBees").value=numBees=0;
+  restart();
+ }
+
  
  function updateBees() { // update loop for game
-
 
   //move the bees randomly
   moveBees();
